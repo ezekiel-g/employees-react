@@ -1,15 +1,43 @@
 import { useState } from 'react'
+import DepartmentList from './DepartmentList'
+import AddDepartment from './AddDepartment'
+import EditDepartment from './EditDepartment'
+import AddEmployee from './AddEmployee'
+import EditEmployee from './EditEmployee'
 
 function App() {
-    const [count, setCount] = useState(0)
+    const [currentDisplay, setCurrentDisplay] = useState('departmentList')
+
+    const handleDisplayChange = displayOption => {
+        setCurrentDisplay(displayOption)
+    }
+
+    let displayComponent
+
+    if (currentDisplay === 'addDepartment') {
+        displayComponent = <AddDepartment />
+    } else if (currentDisplay === 'editDepartment') {
+        displayComponent = <EditDepartment />
+    } else if (currentDisplay === 'addEmployee') {
+        displayComponent = <AddEmployee />
+    } else if (currentDisplay === 'editEmployee') {
+        displayComponent = <EditEmployee />
+    } else {
+        displayComponent = <DepartmentList />
+    }
 
     return (
         <>
-            <h1>This is App.js</h1>
-
-            <button onClick={() => setCount(count => count + 1)}>
-                Count is {count}
-            </button>                
+            <button onClick={() => handleDisplayChange('departmentList')}>
+                Home
+            </button>
+            <button onClick={() => handleDisplayChange('addDepartment')}>
+                Add Department
+            </button>
+            <button onClick={() => handleDisplayChange('addEmployee')}>
+                Add Employee
+            </button>
+            {displayComponent}          
         </>
     )
 }

@@ -1,17 +1,19 @@
 import { useState, useEffect } from 'react'
+import DepartmentTile from './DepartmentTile'
 
-function DepartmentList() {
+function DepartmentList({ baseUrl, changeDisplay }) {
     const [departments, setDepartments] = useState([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null)
 
-    const baseUrl = import.meta.env.VITE_API_BASE_URL
-
     const getDepartments = async () => {
         try {
-            const response = await fetch(baseUrl.concat('/api/v1/department'))
+            const response = await fetch(`${baseUrl}/api/v1/departments`)
             if (!response.ok) {throw new Error('Error in fetch')}
             const data = await response.json()
+            data.sort((a, b) => {
+                return a.name.localeCompare(b.name)
+            })
             setDepartments(data)
         } catch (error) {
             setError(error.message)
@@ -20,17 +22,46 @@ function DepartmentList() {
         }        
     }
 
+    const handleDeleteDepartment = async department => {
+        const isConfirmed = window.confirm(`Delete ${department.name}?`)
+        if (!isConfirmed) { return }
+
+        try {
+            const response = await fetch(
+                `${baseUrl}/api/v1/departments/${department.id}`, {
+                    method: 'DELETE'
+                }
+            )
+            if (response.ok) {
+                setDepartments(previousDepartments => previousDepartments.filter(
+                    previousDepartment => previousDepartment.id !== department.id
+                ))
+                alert('Department deleted successfully')
+            } else {
+                throw new Error('Error deleting department')
+            }
+        } catch (error) {
+            setError(error.message)
+        }
+    }
+
     useEffect(() => {
         getDepartments()
     }, [])
 
     const departmentsDisplay = departments.map(department => {
-        <div>{department.name}</div>
+        return <DepartmentTile
+                key={department.id}
+                department={department}
+                baseUrl={baseUrl}
+                changeDisplay={changeDisplay}
+                handleDeleteDepartment={handleDeleteDepartment}
+            />
     })
 
     return (
         <>
-            <h2>Departments and Employees</h2>
+            <h1>Departments and Employees</h1>
             <div>{error}</div>
             {departmentsDisplay}
         </>

@@ -59,6 +59,17 @@ function DepartmentTile({
         getEmployees()
     }, [])
 
+    const employeesDisplay = employees.map(employee => {
+        return (
+            <EmployeeTile
+                key={employee.id}
+                employee={employee}
+                changeDisplay={changeDisplay}
+                handleDeleteEmployee={handleDeleteEmployee}
+            />
+        )
+    })
+
     return (
         <>
             <h2>{department.name}</h2>
@@ -69,16 +80,7 @@ function DepartmentTile({
                 Delete
             </button>
             <div>{error}</div>
-            <div>
-                {employees.map(employee => (
-                    <EmployeeTile
-                        key={employee.id}
-                        employee={employee}
-                        changeDisplay={changeDisplay}
-                        handleDeleteEmployee={handleDeleteEmployee}
-                    />
-                ))}
-            </div>
+            {employeesDisplay}
         </>
     )
 }

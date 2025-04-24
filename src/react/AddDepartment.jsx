@@ -69,7 +69,7 @@ function AddDepartment({ baseUrl }) {
 
     return (
         <>
-            <h1>Add Department</h1>
+            <h1>Add Department</h1><br />
 
             <div>{errorDisplay}</div>
 
@@ -116,7 +116,7 @@ function AddDepartment({ baseUrl }) {
                         checked={isActive}
                         onChange={() => setIsActive(previous => !previous)}
                     />
-                </div>
+                </div><br />
 
                 <div>
                     <button type="submit">Submit</button>

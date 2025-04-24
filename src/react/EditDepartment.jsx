@@ -8,6 +8,9 @@ function EditDepartment({ currentDepartment, baseUrl, changeDisplay }) {
     const [errors, setErrors] = useState([])
 
     const handleEditDepartment = async event => {
+        const isConfirmed = window.confirm('Update department?')
+        if (!isConfirmed) { return }
+
         event.preventDefault()
 
         setErrors([])
@@ -67,7 +70,7 @@ function EditDepartment({ currentDepartment, baseUrl, changeDisplay }) {
 
     return (
         <>
-            <h1>Edit Department</h1>
+            <h1>Edit Department</h1><br />
 
             <div>{errorDisplay}</div>
 
@@ -114,7 +117,7 @@ function EditDepartment({ currentDepartment, baseUrl, changeDisplay }) {
                         checked={isActive}
                         onChange={() => setIsActive(previous => !previous)}
                     />
-                </div>
+                </div><br />
 
                 <div>
                     <button type="submit">Submit</button>

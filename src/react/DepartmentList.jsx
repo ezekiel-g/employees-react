@@ -50,20 +50,29 @@ function DepartmentList({ baseUrl, changeDisplay }) {
     }, [])
 
     const departmentsDisplay = departments.map(department => {
-        return <DepartmentTile
-                key={department.id}
-                department={department}
-                baseUrl={baseUrl}
-                changeDisplay={changeDisplay}
-                handleDeleteDepartment={handleDeleteDepartment}
-            />
+        return (
+            <div key={department.id} className="col-12 col-sm-6 col-lg-4 mb-3">
+                <div className="card border border-dark rounded-0">
+                    <DepartmentTile
+                        department={department}
+                        baseUrl={baseUrl}
+                        changeDisplay={changeDisplay}
+                        handleDeleteDepartment={handleDeleteDepartment}
+                    />
+                </div>
+            </div>
+        )
     })
 
     return (
         <>
-            <h1>Departments and Employees</h1>
+            <h1>Departments and Employees</h1><br />
             <div>{error}</div>
-            {departmentsDisplay}
+            <div className="container">
+                <div className="row">{departmentsDisplay}</div>
+            </div>
+                
+            
         </>
     )
 }

@@ -72,14 +72,18 @@ function DepartmentTile({
 
     return (
         <>
-            <h2>{department.name}</h2>
-            <button onClick={() => changeDisplay('editDepartment', department)}>
-                Edit
-            </button>
-            <button onClick={() => handleDeleteDepartment(department)}>
-                Delete
-            </button>
-            <div>{error}</div>
+            <div className="d-flex p-1">
+                <h2>{department.name}</h2>
+                <div className="ms-auto">
+                    <button onClick={() => changeDisplay('editDepartment', department)}>
+                        Edit
+                    </button>
+                    <button onClick={() => handleDeleteDepartment(department)}>
+                        Delete
+                    </button>
+                </div>
+                <div>{error}</div>
+            </div>
             {employeesDisplay}
         </>
     )

@@ -30,6 +30,9 @@ function EditEmployee({ currentEmployee, baseUrl, changeDisplay }) {
     }
 
     const handleEditEmployee = async event => {
+        const isConfirmed = window.confirm('Update employee?')
+        if (!isConfirmed) { return }
+
         event.preventDefault()
 
         setErrors([])
@@ -117,7 +120,7 @@ function EditEmployee({ currentEmployee, baseUrl, changeDisplay }) {
 
     return (
         <>
-            <h1>Edit Employee</h1>
+            <h1>Edit Employee</h1><br />
 
             <div>{errorDisplay}</div>
 
@@ -202,7 +205,7 @@ function EditEmployee({ currentEmployee, baseUrl, changeDisplay }) {
                         checked={isActive}
                         onChange={() => setIsActive(previous => !previous)}
                     />
-                </div>
+                </div><br />
 
                 <div>
                     <button type="submit">Submit</button>

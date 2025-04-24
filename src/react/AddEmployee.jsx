@@ -121,7 +121,7 @@ function AddEmployee({ baseUrl }) {
 
     return (
         <>
-            <h1>Add Employee</h1>
+            <h1>Add Employee</h1><br />
 
             <div>{errorDisplay}</div>
 
@@ -206,7 +206,7 @@ function AddEmployee({ baseUrl }) {
                         checked={isActive}
                         onChange={() => setIsActive(previous => !previous)}
                     />
-                </div>
+                </div><br />
 
                 <div>
                     <button type="submit">Submit</button>
